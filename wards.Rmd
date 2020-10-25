@@ -1,0 +1,104 @@
+---
+title: "ward map"
+author: "Yi Ning"
+date: "10/24/2020"
+output: html_document
+---
+```{r}
+library(ggplot2)
+library(tidyverse)
+library(ggmap)
+#library(sf)
+library(plotly)
+library(rgdal)
+rm(list=ls())
+```
+
+```{r}
+summary_ward = read.csv("summary_ward.csv")
+shape <- readOGR(dsn = ".", layer = "wards")
+
+#zip_shape <- st_read("zipcodes.shp")
+```
+
+```{r cars}
+shape = fortify(shape, region = "ward")
+names(shape)[names(shape) == "id"] <- "ward"
+
+shape$ward = tolower(shape$ward)
+summary_ward$ward = tolower(summary_ward$ward)
+
+
+
+##see what variables are missing from shape file
+shape %>%group_by(ward) %>% count()%>%
+left_join(summary_ward %>%group_by(ward) %>% count(), by = "ward") %>% arrange(-desc(n.y))
+  
+merged = summary_ward  %>% left_join(shape, by = "ward")
+
+###regular map
+wardmap = ggplot() +
+  geom_polygon(data = merged, aes(x=long, y = lat, group = ward, fill = ward_prop), color="white", alpha = .7) +
+  scale_fill_gradientn(name = "% of respondents", colors = c("grey", "steelblue1", "steelblue", "steelblue4")) +
+  coord_fixed() + theme_void() + 
+  labs(
+    title = " ",
+    subtitle = " ",
+    caption = " "
+  ) +
+  theme(text = element_text(color = "#22211d"),
+  plot.background = element_rect(fill = "#f5f5f2", color = NA),
+  panel.background = element_rect(fill = "#f5f5f2", color = NA),
+  legend.background = element_rect(fill = "#f5f5f2", color = NA),
+  plot.title = element_text(size= 15, hjust=0.01, color = "#4e4d47", margin = margin(b = -0.1, t = 0.4, l = 2, unit = "cm")),
+  plot.subtitle = element_text(size= 12, hjust=0.01, color = "#4e4d47", margin = margin(b = -0.1, t = 0.4, l = 2, unit = "cm")),
+    plot.caption = element_text( size=7, color = "#4e4d47", margin = margin(b = 0.3, r=-99, unit = "cm") )) +
+    labs(
+      title = "Survey Responses",
+      subtitle = "Share by Ward",
+    caption = "Data: People's Budget Chicago | peoplesbudgetchicago.com"
+  ) 
+
+
+###Save as Image
+ggsave("wardmap.png")
+
+```
+
+**Interactive Map **
+```{r}
+##Interactive Ward Map
+
+interactive_ward = ggplotly(wardmap, tooltip = c("ward", "ward_prop")) %>%  layout(annotations = 
+ list(text = "Data: People's Budget Chicago | peoplesbudgetchicago.com.", 
+      showarrow = F, xref='paper', yref='paper', 
+      xanchor='right', yanchor='auto', xshift=450, yshift=-150,
+      font=list(size=9, color="black"))
+ )
+
+##save html code
+htmlwidgets::saveWidget(as_widget(interactive_ward), "wardplotly.html")
+
+```
+
+
+**Outline Only**
+```{r}
+
+  ggplot() +
+  geom_polygon(data = merged, aes(x=long, y = lat, group = ward), color="black", fill = "white", size = 1) +
+  coord_fixed() + theme_void() + 
+  labs(
+    title = " ",
+    subtitle = " ",
+    caption = " "
+  ) +
+  theme(
+    text = element_text(color = "#22211d")) 
+
+ggsave("wardoutline.png")
+
+```
+
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

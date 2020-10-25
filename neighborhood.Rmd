@@ -1,0 +1,60 @@
+---
+title: "comm map"
+author: "Yi Ning"
+date: "10/24/2020"
+output: html_document
+---
+```{r}
+library(ggplot2)
+library(tidyverse)
+library(ggmap)
+#library(sf)
+library(viridis)
+library(rgdal)
+rm(list=ls())
+```
+
+```{r}
+summary_comm = read.csv("summary_comm.csv")
+shape <- readOGR(dsn = ".", layer = "commarea")
+
+#zip_shape <- st_read("zipcodes.shp")
+```
+
+```{r cars}
+shape = fortify(shape, region = "community")
+names(shape)[names(shape) == "id"] <- "commarea_name"
+
+shape$commarea_name = tolower(shape$commarea_name)
+summary_comm$commarea_name = tolower(summary_comm$commarea_name)
+
+
+
+##see what variables are missing from shape file
+shape %>%group_by(commarea_name) %>% count()%>%
+left_join(summary_comm %>%group_by(commarea_name) %>% count(), by = "commarea_name") %>% arrange(-desc(n.y))
+  
+merged = summary_comm  %>% left_join(shape, by = "commarea_name")
+
+  ggplot() +
+  geom_polygon(data = merged, aes(x=long, y = lat, group = commarea_name, fill = commarea_prop), color="white") +
+  scale_fill_gradientn(colors = c("grey", "palevioletred2", "maroon3", "maroon4")) +
+  coord_fixed() + theme_void() + 
+  labs(
+    title = " ",
+    subtitle = " ",
+    caption = " "
+  ) +
+  theme(
+    text = element_text(color = "#22211d"))
+  
+ggsave("commmap.png")
+
+#    plot.background = element_rect(fill = "#f5f5f2", color = NA),
+#    panel.background = element_rect(fill = "#f5f5f2", color = NA),
+  #  legend.background = element_rect(fill = "#f5f5f2", color = NA))
+```
+
+
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

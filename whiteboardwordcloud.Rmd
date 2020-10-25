@@ -1,0 +1,92 @@
+---
+title: "whiteboard word cloud"
+author: "Yi Ning"
+date: "10/25/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tm)
+library(wordcloud2)
+library(wordcloud)
+library(RColorBrewer)
+library(webshot)
+```
+**Word cloud with raw csv**
+```{r}
+whiteboard <- read.csv("whiteboard.csv")
+
+text <- whiteboard$transcription
+docs <- Corpus(VectorSource(text))
+
+docs <- docs %>%
+  tm_map(removeNumbers) %>%
+  tm_map(removePunctuation)# %>%
+ ##make all the words lower case
+toSpace <- content_transformer(function(x, pattern) {return (gsub(pattern," ",
+x))})
+# Apply it for substituting the regular expression given in one of the former answers by " "
+docs<- tm_map(docs,toSpace,"[^[:graph:]]")
+docs <- tm_map(docs, content_transformer(tolower))
+#remove stopwords
+docs <- tm_map(docs, removeWords, stopwords("english"))
+
+##Determine frequency
+dtm <- TermDocumentMatrix(docs) 
+matrix <- as.matrix(dtm) 
+words <- sort(rowSums(matrix),decreasing=TRUE) 
+wordcloud <- data.frame(word = names(words),freq=words)
+
+##Generate the word cloud
+set.seed(1234) # for reproducibility 
+wordcloud(words = wordcloud$word, freq = wordcloud$freq, min.freq = 1, max.words=200, random.order=FALSE, rot.per=0.35,     
+          
+          colors=brewer.pal(7, "Set1"))
+
+##Save it
+ggsave("whiteboardraw.png")
+
+```
+
+**Some manual cleaning, basically removing sentences to key words**
+```{r}
+whiteboard_two <- read.delim("whiteboard.txt")
+docs <- Corpus(VectorSource(whiteboard_two))
+
+docs <- docs %>%
+  tm_map(removeNumbers) %>%
+  tm_map(removePunctuation)# %>%
+ ##make all the words lower case
+toSpace <- content_transformer(function(x, pattern) {return (gsub(pattern," ",
+x))})
+# Apply it for substituting the regular expression given in one of the former answers by " "
+docs<- tm_map(docs,toSpace,"[^[:graph:]]")
+docs <- tm_map(docs, content_transformer(tolower))
+#remove stopwords
+docs <- tm_map(docs, removeWords, stopwords("english"))
+
+##Determine frequency
+dtm <- TermDocumentMatrix(docs) 
+matrix <- as.matrix(dtm) 
+words <- sort(rowSums(matrix),decreasing=TRUE) 
+wordcloud <- data.frame(word = names(words),freq=words)
+
+
+set.seed(1234) # for reproducibility 
+png("wordcloud_packages.png", width=1280,height=800)
+
+wordcloud(words = wordcloud$word, freq = wordcloud$freq, min.freq = 1, max.words=200, random.order=FALSE, rot.per=0.35,     
+          colors=brewer.pal(7, "Set1"))
+
+##most frequent words 
+barplot(wordcloud[1:10,]$freq, las = 2, names.arg = wordcloud[1:10,]$word,
+        col = "maroon4", main ="Most frequent words",
+        ylab = "Word frequencies")
+
+dev.off()
+
+```
+
+##Guide: https://stackoverflow.com/questions/9637278/r-tm-package-invalid-input-in-utf8towcs
+# https://towardsdatascience.com/create-a-word-cloud-with-r-bde3e7422e8a
