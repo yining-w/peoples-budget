@@ -5,6 +5,7 @@ budget <- read.csv("online_budgetallocations.csv")
 comm <- read.csv("summary_comm.csv")
 geo <- read.csv("summary_geo.csv")
 ward <- read.csv("summary_ward.csv")
+race <- read.csv("Peoples_Budget_user_summary_RACE.csv")
 
 kbl(budget) %>%
   kable_styling(bootstrap_options = c("striped", "hover"))
@@ -22,4 +23,9 @@ kbl(ward) %>%
 geo = geo %>% mutate(proportion = proportion*100)
 colnames(geo) = c("Geographic Side", "Count", "% of Respondents")
 kbl(geo) %>%
+  kable_styling(bootstrap_options = c("striped", "hover"))
+
+race = race %>% mutate(proportion = proportion*100)
+colnames(race) = c("Race", "Count", "% of Respondents")
+kbl(race) %>%
   kable_styling(bootstrap_options = c("striped", "hover"))
