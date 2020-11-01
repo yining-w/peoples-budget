@@ -2,9 +2,9 @@ library(formattable)
 library(kableExtra)
 library(tidyverse)
 budget <- read.csv("online_budgetallocations.csv")
-comm <- read.csv("summary_comm.csv")
+comm <- read.csv("Peoples_Budget_user_summary_COMMUNITY_AREA.csv")
 geo <- read.csv("summary_geo.csv")
-ward <- read.csv("summary_ward.csv")
+ward <- read.csv("Peoples_Budget_user_summary_WARD.csv")
 race <- read.csv("Peoples_Budget_user_summary_RACE.csv")
 
 kbl(budget) %>%
