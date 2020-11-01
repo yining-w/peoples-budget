@@ -10,12 +10,13 @@ library(tidyverse)
 library(ggmap)
 #library(sf)
 library(plotly)
+library(data.table)
 library(rgdal)
 rm(list=ls())
 ```
 
 ```{r}
-summary_ward = read.csv("summary_ward.csv")
+summary_ward = read.csv("Peoples_Budget_user_summary_WARD.csv")
 shape <- readOGR(dsn = ".", layer = "wards")
 
 #zip_shape <- st_read("zipcodes.shp")
@@ -25,34 +26,28 @@ shape <- readOGR(dsn = ".", layer = "wards")
 shape = fortify(shape, region = "ward")
 names(shape)[names(shape) == "id"] <- "ward"
 
-shape$ward = tolower(shape$ward)
-summary_ward$ward = tolower(summary_ward$ward)
-
+summary_ward$ward = tolower(summary_ward$Ward)
+wards = unique(shape$ward)
 
 
 ##see what variables are missing from shape file
 shape %>%group_by(ward) %>% count()%>%
 left_join(summary_ward %>%group_by(ward) %>% count(), by = "ward") %>% arrange(-desc(n.y))
-  
+
+##add missing wards to data
+summary_ward = as.data.table(summary_ward)
+setkey(summary_ward, ward)
+summary_ward = summary_ward[CJ(ward)] 
+summary_ward[is.na(summary_ward)] = 0
+
+##join
 merged = summary_ward  %>% left_join(shape, by = "ward")
 
 ###regular map
 wardmap = ggplot() +
-  geom_polygon(data = merged, aes(x=long, y = lat, group = ward, fill = ward_prop), color="white", alpha = .7) +
-  scale_fill_gradientn(name = "% of respondents", colors = c("grey", "steelblue1", "steelblue", "steelblue4")) +
-  coord_fixed() + theme_void() + 
-  labs(
-    title = " ",
-    subtitle = " ",
-    caption = " "
-  ) +
-  theme(text = element_text(color = "#22211d"),
-  plot.background = element_rect(fill = "#f5f5f2", color = NA),
-  panel.background = element_rect(fill = "#f5f5f2", color = NA),
-  legend.background = element_rect(fill = "#f5f5f2", color = NA),
-  plot.title = element_text(size= 15, hjust=0.01, color = "#4e4d47", margin = margin(b = -0.1, t = 0.4, l = 2, unit = "cm")),
-  plot.subtitle = element_text(size= 12, hjust=0.01, color = "#4e4d47", margin = margin(b = -0.1, t = 0.4, l = 2, unit = "cm")),
-    plot.caption = element_text( size=7, color = "#4e4d47", margin = margin(b = 0.3, r=-99, unit = "cm") )) +
+  geom_polygon(data = merged, aes(x=long, y = lat, group = ward, fill = count), color="black", alpha = .7) +
+  scale_fill_gradientn(name = "Number of respondents", colors = c("grey", "steelblue1", "steelblue", "steelblue4")) +
+  coord_fixed() + theme_void() + theme_minimal() + 
     labs(
       title = "Survey Responses",
       subtitle = "Share by Ward",
@@ -63,13 +58,14 @@ wardmap = ggplot() +
 ###Save as Image
 ggsave("wardmap.png")
 
+wardmap
 ```
 
 **Interactive Map **
 ```{r}
 ##Interactive Ward Map
 
-interactive_ward = ggplotly(wardmap, tooltip = c("ward", "ward_prop")) %>%  layout(annotations = 
+interactive_ward = ggplotly(wardmap, tooltip = c("ward", "count")) %>%  layout(annotations = 
  list(text = "Data: People's Budget Chicago | peoplesbudgetchicago.com.", 
       showarrow = F, xref='paper', yref='paper', 
       xanchor='right', yanchor='auto', xshift=450, yshift=-150,
