@@ -1,6 +1,6 @@
 Idea_ID,Theme,Idea_Text,Ranking,AOI_web_score,wins,loses,ties,total_matches,MOE_95,Idea_Source,UUID,Created_at,Idea_ES,Idea_ID_ES
 1144776,Education,After school training and leadership programs,1,84.61538,21,3,1,25,0.141434093,USER,NA,2020-10-09 22:02:21 UTC,Programas extracurriculares de liderazgo y capacitación,1145234
-1144797,Health Care,Universal Health Care care,2,84,20,3,4,27,0.138284602,USER,NA,2020-10-09 22:03:45 UTC,Sistema de salud universal,1145255
+1144797,Health Care,Universal Health Care,2,84,20,3,4,27,0.138284602,USER,NA,2020-10-09 22:03:45 UTC,Sistema de salud universal,1145255
 1136534,Housing,Create more affordable Housing,3,80.25478,125,30,16,171,0.059665661,SEED,NA,2020-09-24 16:42:13 UTC,Crear viviendas más asequibles y económicas,1136585
 1144775,Housing,Affordable Housing,4,75.86207,21,6,2,29,0.155746906,USER,NA,2020-10-09 22:02:16 UTC,Viviendas asequibles,1145233
 1136536,Health Care,Increased mental Health Care services,5,75.5102,110,35,13,158,0.067053732,SEED,NA,2020-09-24 16:42:13 UTC,Aumentar los servicios de salud mental,1136587
@@ -12,10 +12,10 @@ Idea_ID,Theme,Idea_Text,Ranking,AOI_web_score,wins,loses,ties,total_matches,MOE_
 1136540,Community Resources,Build community Health Care centers,11,70,125,53,14,192,0.064820907,SEED,NA,2020-09-24 16:42:13 UTC,Construir centros de salud comunitarios,1136591
 1144810,Infrastructure,Recycling,12,69.56522,15,6,1,22,0.192276362,USER,NA,2020-10-09 22:04:31 UTC,Reciclaje,1145268
 1136539,Community Resources,Substance abuse treatment programs,13,67.32026,102,49,23,174,0.069693718,SEED,NA,2020-09-24 16:42:13 UTC,Programas de tratamiento para los que abusan de sustancias,1136590
-1144773,Health Care Care,Accessible Health Care care,14,66.66667,17,8,2,27,0.177814807,USER,NA,2020-10-09 22:01:59 UTC,Sistema de salud accesible,1145231
+1144773,Health Care,Accessible Health Care,14,66.66667,17,8,2,27,0.177814807,USER,NA,2020-10-09 22:01:59 UTC,Sistema de salud accesible,1145231
 1144800,Housing,More Housing,15,66.66667,13,6,0,19,0.211969318,USER,NA,2020-10-09 22:03:58 UTC,Más viviendas,1145258
 1136528,Education,Tuition-free Education at Chicago City Colleges for Chicago residents,16,65.73427,93,48,17,158,0.074003702,SEED,NA,2020-09-24 16:42:13 UTC,Educación gratuita para residentes de Chicago en Chicago City Colleges,1136579
-1144783,Health Care Care,Easily accessible Health Care care,17,65.51724,18,9,2,29,0.172995927,USER,NA,2020-10-09 22:02:50 UTC,Sistema de salud fácilmente accesible,1145241
+1144783,Health Care,Easily accessible Health Care,17,65.51724,18,9,2,29,0.172995927,USER,NA,2020-10-09 22:02:50 UTC,Sistema de salud fácilmente accesible,1145241
 1144789,Housing,Funding for Housing / better Housing,18,65,12,6,1,19,0.214471689,USER,NA,2020-10-09 22:03:11 UTC,Financiamiento para viviendas / mejores viviendas,1145247
 1136532,Housing,Homelessness prevention and services,19,64.82759,93,50,18,161,0.073760548,SEED,NA,2020-09-24 16:42:13 UTC,Servicios y prevención de la falta de vivienda,1136583
 1138222,Housing,Lead pipe removal programs with assistance for low-income homeowners,20,64.82759,93,50,19,162,0.07353254,USER,cf084840-0023-11eb-b45e-6f0f9967f47c,2020-09-26 18:20:52 UTC,Programas de eliminación de tuberías de plomo con asistencia para propietarios de viviendas de bajos ingresos,1139988

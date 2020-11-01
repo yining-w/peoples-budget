@@ -1,0 +1,142 @@
+"Idea_ID","Idea_Text","Ranking","AOI_web_score","wins","losses","ties","total_matches","Frequentist_MOE_95","Credible_Interval_95","Idea_Source","UUID","Created_at","Idea_ES","Idea_ID_ES"
+1144797,"Universal health care",1,80.70175,45,10,5,60,0.09986,0.10749,"USER",NA,"2020-10-09 22:03:45 UTC","Sistema de salud universal",1145255
+1136534,"Create more affordable housing",2,79.67914,148,37,18,203,0.05535,0.07206,"SEED",NA,"2020-09-24 16:42:13 UTC","Crear viviendas más asequibles y económicas",1136585
+1136527,"Replace all police in schools with school counselors or social workers",3,76.70455,134,40,19,193,0.05964,0.07661,"SEED",NA,"2020-09-24 16:42:13 UTC","Reemplazar a toda la policía en las escuelas con consejeros académicos o trabajadores sociales",1136578
+1147125,"Mental health hubs",4,76,18,5,2,25,0.16741,0.16731,"USER",NA,"2020-10-20 15:44:00 UTC","Centros de salud mental",1148353
+1136536,"Increased mental health services",5,75.14451,129,42,17,188,0.06178,0.06907,"SEED",NA,"2020-09-24 16:42:13 UTC","Aumentar los servicios de salud mental",1136587
+1144775,"Affordable housing",6,75,38,12,6,56,0.11341,0.11921,"USER",NA,"2020-10-09 22:02:16 UTC","Viviendas asequibles",1145233
+1144811,"Resources for at risk youth",7,73.68421,55,19,5,79,0.0971,0.09964,"USER",NA,"2020-10-09 22:04:34 UTC","Recursos para jóvenes en situación de riesgo",1145269
+1144776,"After school training and leadership programs",8,73.01587,45,16,5,66,0.10709,0.10995,"USER",NA,"2020-10-09 22:02:21 UTC","Programas extracurriculares de liderazgo y capacitación",1145234
+1147134,"Need help with rent assistance",9,72.72727,15,5,1,21,0.19048,0.18179,"USER",NA,"2020-10-20 15:44:32 UTC","Ayuda para obtener asistencia de alquiler",1148362
+1147101,"Black owned and operated businesses",10,72.41379,20,7,4,31,0.15733,0.16047,"USER",NA,"2020-10-20 15:41:56 UTC","Negocios con propietarios y trabajadores de gente negra",1148329
+1144815,"Youth employment training / trades",11,71.69811,37,14,6,57,0.11694,0.12064,"USER",NA,"2020-10-09 22:04:53 UTC","Formación laboral juvenil / oficios",1145273
+1144783,"Easily accessible health care",12,71.42857,44,17,4,65,0.10982,0.11118,"USER",NA,"2020-10-09 22:02:50 UTC","Sistema de salud fácilmente accesible",1145241
+1144799,"More education grants / scholarships",13,71.21212,46,18,1,65,0.11007,0.1083,"USER",NA,"2020-10-09 22:03:54 UTC","Más subsidios / becas de educación",1145257
+1147103,"Grocery stores in food deserts",14,70.83333,16,6,3,25,0.17817,0.17721,"USER",NA,"2020-10-20 15:42:03 UTC","Supermercados en comunidades con desiertos alimentarios",1148331
+1141481,"Fund universal child care",15,70.37037,56,23,7,86,0.09651,0.09896,"USER","3c247cd0-04f6-11eb-93ca-db8214976cec","2020-10-02 21:32:01 UTC","Financiar el cuidado infantil universal",1143539
+1147132,"Access to childcare",16,70.37037,18,7,5,30,0.1634,0.16633,"USER",NA,"2020-10-20 15:44:25 UTC","Acceso a guarderías",1148360
+1144817,"Livable wages",17,70,34,14,4,52,0.12455,0.12562,"USER",NA,"2020-10-09 22:04:59 UTC","Salario digno",1145275
+1136524,"Free public Head start and Early head start program",18,69.75309,112,48,22,182,0.06673,0.08458,"SEED",NA,"2020-09-24 16:42:13 UTC","Programas públicos gratuitos de Head Start y de Early Head Start",1136575
+1144789,"Funding for housing / better housing",19,69.64286,38,16,6,60,0.11634,0.11882,"USER",NA,"2020-10-09 22:03:11 UTC","Financiamiento para viviendas / mejores viviendas",1145247
+1144803,"More options for affordable housing",20,69.23077,35,15,6,56,0.12088,0.1233,"USER",NA,"2020-10-09 22:04:07 UTC","Más opciones de viviendas asequibles",1145261
+1136540,"Build community health centers",21,68.09524,142,66,19,227,0.06063,0.06252,"SEED",NA,"2020-09-24 16:42:13 UTC","Construir centros de salud comunitarios",1136591
+1136532,"Homelessness prevention and services",22,67.45562,113,54,21,188,0.06698,0.07555,"SEED",NA,"2020-09-24 16:42:13 UTC","Servicios y prevención de la falta de vivienda",1136583
+1136528,"Tuition-free education at Chicago City Colleges for Chicago residents",23,66.66667,111,55,22,188,0.06738,0.07809,"SEED",NA,"2020-09-24 16:42:13 UTC","Educación gratuita para residentes de Chicago en Chicago City Colleges",1136579
+1147118,"Advocates for the youth / mentors",24,66.66667,17,8,3,28,0.17461,0.17108,"USER",NA,"2020-10-20 15:43:37 UTC","Abogadores de los jóvenes / mentores",1148346
+1140850,"Combine food assistance efforts with provision of fresh produce from local farmers",25,66.32653,64,32,11,107,0.08955,0.0915,"USER","c70d0d00-041d-11eb-b8b3-ff1b6ec2112b","2020-10-01 19:58:46 UTC","Combinar los esfuerzos de asistencia alimentaria con el suministro de productos frescos de agricultores locales.",1141779
+1136539,"Substance abuse treatment programs",26,66.29213,117,59,29,205,0.06471,0.09351,"SEED",NA,"2020-09-24 16:42:13 UTC","Programas de tratamiento para los que abusan de sustancias",1136590
+1144804,"More programs for children and youth",27,66.07143,36,18,3,57,0.12291,0.12186,"USER",NA,"2020-10-09 22:04:11 UTC","Más programas para niños y la juventud",1145262
+1144794,"More rehab centers to help people get off drugs and have a shot at a better life",28,65.95745,30,15,5,50,0.13134,0.13151,"USER",NA,"2020-10-09 22:03:31 UTC","Más centros de rehabilitación para ayudar a que las personas dejen las drogas y tengan la oportunidad de obtener una vida mejor",1145252
+1136563,"Restorative justice options for non-violent offenses",29,65.76087,120,62,22,204,0.06511,0.07103,"SEED",NA,"2020-09-24 16:42:13 UTC","Opciones de justicia restaurativa para delitos no violentos",1136614
+1144788,"Funded mental health services",30,65.625,41,21,6,68,0.11289,0.11358,"USER",NA,"2020-10-09 22:03:08 UTC","Servicios de salud mental financiados",1145246
+1144800,"More housing",31,65.51724,37,19,2,58,0.12232,0.12044,"USER",NA,"2020-10-09 22:03:58 UTC","Más viviendas",1145258
+1138222,"Lead pipe removal programs with assistance for low-income homeowners",32,64.88095,108,58,26,192,0.06752,0.08756,"USER","cf084840-0023-11eb-b45e-6f0f9967f47c","2020-09-26 18:20:52 UTC","Programas de eliminación de tuberías de plomo con asistencia para propietarios de viviendas de bajos ingresos",1139988
+1136543,"Maternal and Child health",33,64.83516,117,63,25,205,0.06536,0.07894,"SEED",NA,"2020-09-24 16:42:13 UTC","Salud maternal e infantil",1136594
+1144773,"Accessible health care",34,64.58333,30,16,4,50,0.13256,0.13151,"USER",NA,"2020-10-09 22:01:59 UTC","Sistema de salud accesible",1145231
+1136530,"Increased number of emergency shelters and housing assistance",35,64.3617,120,66,24,210,0.06478,0.07349,"SEED",NA,"2020-09-24 16:42:13 UTC","Mayor número de refugios de emergencia y programas de asistencia para la vivienda",1136581
+1147110,"Fresh food options / food security",36,64.28571,17,9,1,27,0.18074,0.17215,"USER",NA,"2020-10-20 15:43:07 UTC","Opciones de alimentos frescos / seguridad alimentaria",1148338
+1136553,"Free high-speed internet access",37,64,127,71,19,217,0.06386,0.06505,"SEED",NA,"2020-09-24 16:42:13 UTC","Acceso gratuito a Internet de alta velocidad",1136604
+1136525,"Free after school programs",38,63.73626,115,65,12,192,0.068,0.06874,"SEED",NA,"2020-09-24 16:42:13 UTC","Programas para después de la escuela gratuitos",1136576
+1136550,"Domestic violence prevention and support",39,63.53591,114,65,15,194,0.06773,0.06868,"SEED",NA,"2020-09-24 16:42:13 UTC","Prevención y apoyo para victimas de la violencia doméstica",1136601
+1143538,"Replace the police with counselors",40,63.38028,44,25,2,71,0.11206,0.11043,"USER",NA,"2020-10-08 03:56:50 UTC","Reemplazar a la policía con consejeros",1143540
+1144795,"Jobs for youth",41,63.26531,30,17,2,49,0.13498,0.13209,"USER",NA,"2020-10-09 22:03:35 UTC","Trabajos para la juventud",1145253
+1144774,"Affordable and accessible housing / shelters",42,63.15789,35,20,4,59,0.12309,0.12196,"USER",NA,"2020-10-09 22:02:12 UTC","Viviendas / refugios asequibles y accesibles",1145232
+1144813,"Trauma healing",43,62.5,34,20,3,57,0.12568,0.12381,"USER",NA,"2020-10-09 22:04:46 UTC","Tratamiento de Traumas",1145271
+1136556,"Update the city’s water infrastructure",44,62.2449,121,73,22,216,0.06465,0.06568,"SEED",NA,"2020-09-24 16:42:13 UTC","Actualizar la infraestructura hídrica de la ciudad",1136607
+1147123,"Economic ecosystem that equals generational wealth",45,62.06897,17,10,1,28,0.17972,0.17108,"USER",NA,"2020-10-20 15:43:53 UTC","Un ecosistema económico que equivalga a la riqueza generacional",1148351
+1144787,"Free health clinics with mental health",46,61.81818,33,20,2,55,0.1284,0.12575,"USER",NA,"2020-10-09 22:03:04 UTC","Clínicas gratuitas de salud con salud mental",1145245
+1147130,"Reliable safe transportation",47,61.76471,20,12,1,33,0.1658,0.15894,"USER",NA,"2020-10-20 15:44:18 UTC","Transporte seguro y confiable",1148358
+1136541,"Increased funding for SNAP food assistance",48,61.36364,107,67,23,197,0.06799,0.07133,"SEED",NA,"2020-09-24 16:42:13 UTC","Mayor financiamiento para el programa de asistencia alimentaria de SNAP",1136592
+1136533,"Mandate community benefit agreements for all developments with city funding",49,61.17647,103,65,14,182,0.0708,0.07135,"SEED",NA,"2020-09-24 16:42:13 UTC","Obligar que los desarrollos con fondos de la ciudad tengan acuerdos de beneficio comunitario",1136584
+1144781,"CTA",50,61.01695,35,22,5,62,0.1214,0.12018,"USER",NA,"2020-10-09 22:02:42 UTC","CTA (Autoridad de Tránsito de Chicago)",1145239
+1144816,"Better grocery stores",51,60.78431,30,19,0,49,0.1367,0.13209,"USER",NA,"2020-10-09 22:04:56 UTC","Mejores tiendas de comestibles",1145274
+1143536,"More programs for youth so that they don't join gangs",52,59.32203,34,23,5,62,0.12228,0.1206,"USER",NA,"2020-10-08 03:56:39 UTC","Más programas para los jóvenes , para que no se involucren en pandillas",1142344
+1144780,"COVID relief",53,59.32203,34,23,6,63,0.1213,0.11986,"USER",NA,"2020-10-09 22:02:39 UTC","Socorro del COVID",1145238
+1144793,"Violence and gun control",54,59.32203,34,23,1,58,0.12642,0.12325,"USER",NA,"2020-10-09 22:03:27 UTC","Control de violencia y armas",1145251
+1144790,"Get positive groups together for young people to be productive and go into business",55,59.15493,41,28,4,73,0.11276,0.11127,"USER",NA,"2020-10-09 22:03:15 UTC","Juntar a grupos positivos para que los jóvenes sean productivos y emprendan negocios",1145248
+1139986,"Black, Indigenous, and People of Color (BIPOC) entrepreneurship assistance funding",56,57.74648,81,59,9,149,0.07931,0.07908,"USER",NA,"2020-09-29 19:58:45 UTC","Apoyo financiero para emprendimientos de personas afroamericanas, indígenas, y de color (BIPOC)",1139989
+1136547,"Green jobs work program",57,56.14973,104,81,22,207,0.0676,0.06756,"SEED",NA,"2020-09-24 16:42:13 UTC","Programa de trabajo de empleos verdes",1136598
+1147104,"Neighborhood communications",58,55.55556,14,11,1,26,0.191,0.18003,"USER",NA,"2020-10-20 15:42:08 UTC","Comunicaciones para el barrio",1148332
+1147112,"More walkable destinations (access, visibility, vibrant businesses)",59,54.16667,12,10,0,22,0.20821,0.19343,"USER",NA,"2020-10-20 15:43:15 UTC","Más destinos que sean caminables (acceso, visibilidad, negocios vibrantes)",1148340
+1136549,"Disabled youth employment programs",60,54.09836,98,83,23,204,0.06838,0.06799,"SEED",NA,"2020-09-24 16:42:13 UTC","Programas de empleo para jóvenes discapacitados",1136600
+1147117,"Anonymous break the silence program",61,53.57143,14,12,0,26,0.1917,0.18003,"USER",NA,"2020-10-20 15:43:34 UTC","Programa anónimo para romper el silencio",1148345
+1136531,"Increased foreclosure prevention",62,53.37079,94,82,18,194,0.0702,0.06971,"SEED",NA,"2020-09-24 16:42:13 UTC","Mayor prevención de ejecuciones hipotecarias",1136582
+1147119,"Safe houses",63,53.125,16,14,3,33,0.17026,0.16222,"USER",NA,"2020-10-20 15:43:40 UTC","Casas seguras",1148347
+1144806,"Police accountability",64,53.06122,25,22,4,51,0.13697,0.13278,"USER",NA,"2020-10-09 22:04:18 UTC","Rendición de cuentas de la policía",1145264
+1136554,"Update city transportation infrastructure (roads, bridges, sidewalks, CTA trains)",65,52.77778,94,84,18,196,0.06989,0.06934,"SEED",NA,"2020-09-24 16:42:13 UTC","Actualizar la infraestructura de transporte de la ciudad (carreteras, puentes, banquetas, trenes de CTA)",1136605
+1144778,"Community centers",66,52.63158,29,26,5,60,0.12634,0.12297,"USER",NA,"2020-10-09 22:02:30 UTC","Centros comunitarios",1145236
+1144801,"More jobs for high school students",67,52.38095,32,29,5,66,0.12049,0.11755,"USER",NA,"2020-10-09 22:04:01 UTC","Más empleos para estudiantes de la preparatoria",1145259
+1139983,"More public housing",68,52.02703,76,70,10,156,0.0784,0.07759,"USER",NA,"2020-09-29 19:56:04 UTC","Más viviendas públicas",1141775
+1147115,"Neighborhood driven events",69,52,12,11,1,24,0.19988,0.18694,"USER",NA,"2020-10-20 15:43:26 UTC","Eventos organizados por el barrio",1148343
+1144810,"Recycling",70,51.72414,29,27,4,60,0.12644,0.12297,"USER",NA,"2020-10-09 22:04:31 UTC","Reciclaje",1145268
+1147120,"Health care education",71,51.72414,14,13,2,29,0.18187,0.17189,"USER",NA,"2020-10-20 15:43:44 UTC","Educación sanitaria",1148348
+1136548,"Funding for senior wellness and nutrition",72,51.20482,84,80,22,186,0.07183,0.07087,"SEED",NA,"2020-09-24 16:42:13 UTC","Financiamiento para el bienestar y la nutrición de las personas mayores",1136599
+1136523,"Safe routes to schools",73,50.81081,93,90,25,208,0.06794,0.06702,"SEED",NA,"2020-09-24 16:42:13 UTC","Rutas seguras para llegar a las escuelas",1136574
+1147107,"Community center with pool and activities that are not typical in urban areas",74,50,16,16,3,35,0.16565,0.15749,"USER",NA,"2020-10-20 15:42:21 UTC","Centro comunitario con piscina y actividades que no son típicas en zonas urbanas",1148335
+1136538,"Air pollution prevention program",75,49.46809,92,94,17,203,0.06878,0.06791,"SEED",NA,"2020-09-24 16:42:13 UTC","Programa de prevención de la contaminación del aire",1136589
+1147126,"Safer, well-lit streets / higher walk score",76,48.3871,14,15,1,30,0.17883,0.16906,"USER",NA,"2020-10-20 15:44:04 UTC","Calles más seguras y bien iluminadas / un puntuaje de caminar más alto",1148354
+1136552,"More public transit options",77,47.17949,91,102,26,219,0.06612,0.06478,"SEED",NA,"2020-09-24 16:42:13 UTC","Mayor opciones de transporte público",1136603
+1138224,"Small, locally owned business rental assistance",78,47.05882,87,98,11,196,0.06988,0.06896,"USER","cf084840-0023-11eb-b45e-6f0f9967f47c","2020-09-26 18:22:57 UTC","Asistencia de alquiler para empresas pequeñas con propietarios locales",1139987
+1139984,"More cooperative housing",79,46.09929,64,75,14,153,0.07899,0.07732,"USER",NA,"2020-09-29 19:56:09 UTC","Más cooperativas de viviendas",1141776
+1144779,"Community spaces",80,45.76271,26,31,3,60,0.12606,0.12199,"USER",NA,"2020-10-09 22:02:35 UTC","Espacios comunitarios",1145237
+1147100,"Funded activities for children",81,45.71429,15,18,1,34,0.16745,0.1591,"USER",NA,"2020-10-20 15:41:52 UTC","Actividades sin costo para niños",1148328
+1144777,"Alternatives to police",82,45.28302,23,28,1,52,0.13529,0.13078,"USER",NA,"2020-10-09 22:02:25 UTC","Alternativas a la policía",1145235
+1147121,"More workforce institutions",83,45.16129,13,16,0,29,0.18112,0.17115,"USER",NA,"2020-10-20 15:43:47 UTC","Más instituciones de fuerza laboral",1148349
+1146850,"City loans for solar panels on homes and installation businesses",84,44.82759,12,15,1,28,0.18421,0.17309,"USER","77fd6d10-1229-11eb-8b6f-f91f968e283d","2020-10-19 16:46:05 UTC","Préstamos municipales para paneles solares en hogares y negocios de instalación",1148365
+1144791,"Good roads and traffic lights",85,44.77612,29,36,0,65,0.12089,0.1178,"USER",NA,"2020-10-09 22:03:19 UTC","Buenas calles y semáforos",1145249
+1136526,"Sex education in schools",86,44.57831,73,91,23,187,0.07124,0.06932,"SEED",NA,"2020-09-24 16:42:13 UTC","Educación sexual en las escuelas",1136577
+1144798,"Money for small businesses",87,44.44444,23,29,0,52,0.13506,0.13078,"USER",NA,"2020-10-09 22:03:51 UTC","Dinero para pequeñas empresas",1145256
+1147111,"A police department that knows the community (respect)",88,44,10,13,2,25,0.19458,0.18039,"USER",NA,"2020-10-20 15:43:11 UTC","Un departamento de policía que conozca a la comunidad (respeto)",1148339
+1144796,"Less property taxes",89,43.63636,23,30,3,56,0.12989,0.12518,"USER",NA,"2020-10-09 22:03:41 UTC","Menos impuestos de propiedad",1145254
+1139985,"More community land trusts",90,43.57143,60,78,13,151,0.07909,0.07722,"USER",NA,"2020-09-29 19:56:12 UTC","Más fideicomisos de tierras de control comunitario",1141777
+1144812,"Small business loan",91,43.33333,25,33,3,61,0.12435,0.12018,"USER",NA,"2020-10-09 22:04:43 UTC","Préstamos para pequeñas empresas",1145270
+1136535,"Lead poison prevention program",92,43.25843,76,100,21,197,0.06918,0.06742,"SEED",NA,"2020-09-24 16:42:13 UTC","Programas de prevención del envenenamiento por plomo",1136586
+1136558,"Gang resistance education",93,43.25843,76,100,13,189,0.07063,0.0693,"SEED",NA,"2020-09-24 16:42:13 UTC","Educación sobre como resistir entrar a las pandillas",1136609
+1147127,"More retail",94,42.30769,10,14,1,25,0.19366,0.18039,"USER",NA,"2020-10-20 15:44:07 UTC","Más comerciantes minoristas",1148355
+1144818,"More multi-cultural businesses",95,41.66667,29,41,3,73,0.11309,0.1098,"USER",NA,"2020-10-09 22:05:02 UTC","Más negocios multiculturales",1145276
+1144820,"Alderpeople responsiveness",96,41.07143,22,32,4,58,0.12661,0.12153,"USER",NA,"2020-10-09 22:05:11 UTC","Concejales receptivos",1145278
+1144809,"Recreation",97,40.81633,19,28,3,50,0.13623,0.13038,"USER",NA,"2020-10-09 22:04:28 UTC","Recreación",1145267
+1144819,"Voter registration and engagement programs",98,40.32258,24,36,3,63,0.12113,0.11694,"USER",NA,"2020-10-09 22:05:06 UTC","Programas de participación y registro de votantes",1145277
+1144786,"Entrepreneurship programs",99,40,19,29,3,51,0.13445,0.1287,"USER",NA,"2020-10-09 22:03:00 UTC","Programas de emprendimiento",1145244
+1136555,"Affordable rooftop solar program",100,39.65517,68,104,12,184,0.07068,0.06915,"SEED",NA,"2020-09-24 16:42:13 UTC","Programa económico y asequible para systemas solares en las azoteas",1136606
+1144785,"Entertainment venues for youth",101,39.65517,22,34,1,57,0.12699,0.12291,"USER",NA,"2020-10-09 22:02:57 UTC","Lugares de entretenimiento para la juventud",1145243
+1136551,"Increased Pedestrian and bicycle safety",102,39.28571,76,118,22,216,0.06513,0.06323,"SEED",NA,"2020-09-24 16:42:13 UTC","Mayor seguridad para peatones y ciclistas",1136602
+1147114,"Alderman presence",103,39.28571,10,16,1,27,0.18422,0.17215,"USER",NA,"2020-10-20 15:43:23 UTC","Presencia del concejal",1148342
+1147124,"Street beautification",104,39.28571,10,16,0,26,0.18773,0.17621,"USER",NA,"2020-10-20 15:43:57 UTC","Embellecimiento de la calle",1148352
+1147102,"Term limited elected officials",105,38.88889,6,10,1,17,0.23174,0.20854,"USER",NA,"2020-10-20 15:42:00 UTC","Plazos limitados para funcionarios electos",1148330
+1144782,"Cultural events",106,38.46154,19,31,4,54,0.12976,0.12384,"USER",NA,"2020-10-09 22:02:47 UTC","Eventos culturales",1145240
+1147133,"Accessible streets and sidewalks",107,38.46154,9,15,0,24,0.19464,0.18177,"USER",NA,"2020-10-20 15:44:29 UTC","Calles y banquetas accesibles",1148361
+1136542,"Teen pregnancy prevention",108,38.09524,63,103,15,181,0.07075,0.06881,"SEED",NA,"2020-09-24 16:42:13 UTC","Prevención del embarazo en adolescentes",1136593
+1144808,"Personal protective equipment (PPE) like masks",109,37.93103,21,35,4,60,0.12277,0.11767,"USER",NA,"2020-10-09 22:04:24 UTC","Equipos de protección individual (PPE) como mascarillas respiratorias",1145266
+1147106,"The community policing the community",110,37.93103,10,17,0,27,0.18302,0.17215,"USER",NA,"2020-10-20 15:42:17 UTC","Que la comunidad vigile a la comunidad",1148334
+1147105,"Transparent communications between law enforcement and residents",111,37.03704,9,16,0,25,0.18929,0.17721,"USER",NA,"2020-10-20 15:42:13 UTC","Comunicaciones transparentes entre los agentes del orden y residentes",1148333
+1146295,"Increased bicycle infrastructure",112,36.36364,11,20,3,34,0.16169,0.15078,"USER","fcbe57c0-102e-11eb-abd9-5bed4aab4b5f","2020-10-17 04:28:28 UTC","Mayor infraestructura para bicicletas",1148366
+1136537,"HIV/AIDS prevention and support",113,34.65909,60,114,26,200,0.06595,0.06307,"SEED",NA,"2020-09-24 16:42:13 UTC","Prevención y apoyo para el VIH / SIDA",1136588
+1147128,"Green spaces – parks / trails",114,33.33333,11,23,6,40,0.14609,0.13407,"USER",NA,"2020-10-20 15:44:10 UTC","Espacios verdes – parques / senderos",1148356
+1147122,"Time banking and fiscal sponsorship for voluntarism",115,32.25806,9,20,2,31,0.16456,0.15314,"USER",NA,"2020-10-20 15:43:50 UTC","Un banco de tiempo y patrocinio fiscal para voluntarios",1148350
+1147108,"Community policing to help keep the neighborhood safe",116,32.14286,8,18,2,28,0.17299,0.15977,"USER",NA,"2020-10-20 15:42:59 UTC","Vigilancia comunitaria para ayudar a mantener la seguridad del vecindario",1148336
+1147136,"Hire a qualified person to randomly visit nursing homes so that every month they report to their Alderperson about senior care",117,32,7,16,2,25,0.18286,0.16731,"USER",NA,"2020-10-20 15:44:39 UTC","Que una persona calificada visite hogares de ancianos al azar y cada mes haga un informe a su concejal sobre el cuidado de personas mayores",1148364
+1144814,"Replace current police with new police officers",118,30.95238,12,28,2,42,0.13981,0.13243,"USER",NA,"2020-10-09 22:04:49 UTC","Reemplazar a la policía actual con nuevos oficiales de policía",1145272
+1136545,"More public art",119,30.81395,52,118,7,177,0.06802,0.06659,"SEED",NA,"2020-09-24 16:42:13 UTC","Más arte público",1136596
+1136546,"Farmers markets",120,30.58824,51,117,8,176,0.06807,0.06651,"SEED",NA,"2020-09-24 16:42:13 UTC","Mercados de productores agrícolas",1136597
+1147135,"A lot of nursing homes",121,30.55556,10,24,1,35,0.15261,0.14419,"USER",NA,"2020-10-20 15:44:35 UTC","Muchos hogares de ancianos",1148363
+1147109,"Community gatherings",122,30,8,20,2,30,0.16398,0.15195,"USER",NA,"2020-10-20 15:43:03 UTC","Reuniones comunitarias",1148337
+1144805,"Place to go to give opinions",123,29.5082,17,42,3,62,0.11353,0.10879,"USER",NA,"2020-10-09 22:04:14 UTC","Un lugar para dar opiniones",1145263
+1144792,"Green space",124,28.88889,12,31,5,48,0.12822,0.11961,"USER",NA,"2020-10-09 22:03:23 UTC","Espacios verdes",1145250
+1136557,"Snow and ice removal",125,28.26087,51,131,11,193,0.06352,0.06181,"SEED",NA,"2020-09-24 16:42:13 UTC","Trasteo y eliminación de nieve y hielo en las calles",1136608
+1136544,"Fire prevention and safety program",126,28.10811,51,132,9,192,0.06358,0.06207,"SEED",NA,"2020-09-24 16:42:13 UTC","Programa de prevención y seguridad contra incendios",1136595
+1147131,"Support for stores closing down",127,28,6,17,0,23,0.1835,0.17048,"USER",NA,"2020-10-20 15:44:22 UTC","Apoyo para las tiendas que están cerrando",1148359
+1136560,"Body cameras for police",128,27.46114,52,139,11,202,0.06155,0.05994,"SEED",NA,"2020-09-24 16:42:13 UTC","Cámaras corporales para policía",1136611
+1147129,"Greater variety of entertainment",129,26.66667,7,21,1,29,0.16095,0.15002,"USER",NA,"2020-10-20 15:44:14 UTC","Mayor variedad de entretenimiento",1148357
+1144784,"Entertainment venues",130,25.42373,14,43,2,59,0.11111,0.1066,"USER",NA,"2020-10-09 22:02:53 UTC","Lugares de entretenimiento",1145242
+1136529,"Increased building code enforcement",131,24.66667,36,112,13,161,0.06659,0.06397,"SEED",NA,"2020-09-24 16:42:13 UTC","Mayor aplicación y cumplimiento con las leyes del código de construcción",1136580
+1144802,"More lights",132,24.61538,15,48,4,67,0.10315,0.09836,"USER",NA,"2020-10-09 22:04:04 UTC","Más luces",1145260
+1147113,"Link up the numerous large lot owners (3,000+)",133,20.68966,5,22,0,27,0.15279,0.14299,"USER",NA,"2020-10-20 15:43:19 UTC","Vincular a los numerosos propietarios de lotes grandes (más de 3,000)",1148341
+1147116,"Shut down (legally) crime hot-spots",134,20.68966,5,22,1,28,0.15004,0.1389,"USER",NA,"2020-10-20 15:43:30 UTC","Cerrar (legalmente) los puntos calientes del crimen",1148344
+1136562,"Police use of force training",135,20.30457,39,156,9,204,0.0552,0.05378,"SEED",NA,"2020-09-24 16:42:13 UTC","Entrenamiento policial sobre el uso de la fuerza",1136613
+1136559,"Police leadership training",136,18.03279,32,149,13,194,0.0541,0.05212,"SEED",NA,"2020-09-24 16:42:13 UTC","Entrenamiento de liderazgo policial",1136610
+1136561,"Increased CPD anti-gang initiative funding",137,17.93478,32,150,16,198,0.05344,0.05119,"SEED",NA,"2020-09-24 16:42:13 UTC","Aumento de la financiación de la iniciativa antipandilla de CPD",1136612
+1140851,"Preference for union companies in permitting",138,13.63636,14,94,4,112,0.06356,0.06145,"USER","e439f610-0423-11eb-b16a-bdbe6a6a0c31","2020-10-01 20:26:30 UTC","Dar preferencia a la contratación de empresas sindicales en los permisos y proyectos de la ciudad",1141778
+1136564,"Predictive policing (e.g., gang database, strategic subject list)",139,10.71429,17,149,12,178,0.04544,0.0435,"SEED",NA,"2020-09-24 16:42:13 UTC","Policía predictiva (por ejemplo, base de datos de pandillas, lista estratégica de sujetos)",1136615
+1144807,"Police protection",140,6.55738,3,56,3,62,0.06162,0.05767,"USER",NA,"2020-10-09 22:04:21 UTC","Protección policial",1145265
+1143537,"More police in our community",141,4.28571,2,66,3,71,0.04711,0.04405,"USER",NA,"2020-10-08 03:56:45 UTC","Necesitamos mas policias en nuestra comunidad.",1141811

@@ -52,6 +52,7 @@ Plot by theme
 ```{r}
 pairwise_eng %>%
   ggplot() +
+  geom_hline(aes(yintercept=median(Score)), line = "dashed", color= "maroon4") +
   geom_point(aes(y = Score, x=Rank),color="maroon4") +
   facet_wrap(~Theme) + 
   theme_minimal() +
@@ -60,6 +61,8 @@ pairwise_eng %>%
 The further right the dot the higher its rank. The horizontal line indicates the median score.",
        caption = "The People's Budget Chicago",
        x = "Rank", y = "Score")
+
+?geom_hline
   
 ```
   
