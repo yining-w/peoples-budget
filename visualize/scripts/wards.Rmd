@@ -1,0 +1,105 @@
+---
+title: "ward map"
+author: "Yi Ning"
+date: "10/24/2020"
+output: html_document
+---
+```{r}
+library(ggplot2)
+library(tidyverse)
+library(ggmap)
+#library(sf)
+library(plotly)
+library(data.table)
+library(rgdal)
+library(viridis)
+rm(list=ls())
+```
+
+```{r}
+summary_ward = read.csv("~/GitHub/Peoples Budget Viz/peoples-budget-viz/visualize/csvs/Peoples_Budget_user_summary_WARD.csv")
+shape <- readOGR(dsn=path.expand("~/GitHub/Peoples Budget Viz/peoples-budget-viz/visualize/csvs"), layer="wards")
+
+
+#zip_shape <- st_read("zipcodes.shp")
+```
+
+```{r cars}
+shape = fortify(shape, region = "ward")
+names(shape)[names(shape) == "id"] <- "ward"
+
+summary_ward$ward = tolower(summary_ward$Ward)
+wards = unique(shape$ward)
+
+
+##see what variables are missing from shape file
+shape %>%group_by(ward) %>% count()%>%
+left_join(summary_ward %>%group_by(ward) %>% count(), by = "ward") %>% arrange(-desc(n.y))
+
+##add missing wards to data
+summary_ward = as.data.table(summary_ward)
+setkey(summary_ward, ward)
+summary_ward = summary_ward[CJ(ward)] 
+summary_ward[is.na(summary_ward)] = 0
+
+##join
+merged = summary_ward  %>% left_join(shape, by = "ward")
+
+###regular map
+wardmap = ggplot() +
+  geom_polygon(data = merged, aes(x=long, y = lat, group = ward, fill = count), color="black", alpha = .7) +
+ # scale_fill_gradientn(name = "Number of respondents", colors = c("grey", "steelblue1", "steelblue", #"steelblue4")) +
+  scale_fill_viridis(option="viridis") + 
+  coord_fixed() + 
+  theme_void() + 
+  theme_minimal() + 
+    labs(title = "Survey Responses",
+      subtitle = "Share by Ward",
+    caption = "Data: People's Budget Chicago | peoplesbudgetchicago.com"
+  ) 
+
+wardmap
+
+###Save as Image
+ggsave("~/GitHub/Peoples Budget Viz/peoples-budget-viz/visualize/output/wardmap.png")
+
+
+```
+
+**Interactive Map **
+```{r}
+##Interactive Ward Map
+
+interactive_ward = ggplotly(wardmap, tooltip = c("ward", "count")) %>%  layout(annotations = 
+ list(text = "Data: People's Budget Chicago | peoplesbudgetchicago.com.", 
+      showarrow = F, xref='paper', yref='paper', 
+      xanchor='right', yanchor='auto', xshift=450, yshift=-150,
+      font=list(size=9, color="black"))
+ )
+
+##save html code
+htmlwidgets::saveWidget(as_widget(interactive_ward), "wardplotly.html")
+
+```
+
+
+**Outline Only**
+```{r}
+
+  ggplot() +
+  geom_polygon(data = merged, aes(x=long, y = lat, group = ward), color="black", fill = "white", size = 1) +
+  coord_fixed() + theme_void() + 
+  labs(
+    title = " ",
+    subtitle = " ",
+    caption = " "
+  ) +
+  theme(
+    text = element_text(color = "#22211d")) 
+
+ggsave("wardoutline.png")
+
+```
+
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

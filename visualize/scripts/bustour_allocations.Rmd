@@ -1,0 +1,94 @@
+<<<<<<< HEAD
+---
+title: "bustour allocations"
+author: "Yi Ning"
+date: "10/27/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(kableExtra)
+library(RColorBrewer)
+library(tidyverse)
+library(reshape)
+
+bustour = read.csv('bustour_allocations.csv')
+```
+
+Make summary table
+```{r pressure, echo=FALSE}
+kbl(bustour) %>%
+  kable_styling(bootstrap_options = c("striped", "hover"))
+
+
+```
+Plot by theme and neighborhood
+```{r}
+##pivot data for bar graph
+melt_bustour <- melt(bustour, id=c("Location", "Notes"))
+colnames(melt_bustour) = c("Location", "Notes", "Theme", "Dollars")
+
+
+
+ggplot(melt_bustour, aes(fill=Theme, y=Dollars, x=Location)) + 
+    geom_bar(position="stack", stat="identity") + 
+  theme_minimal() + scale_fill_brewer(palette= 4) +
+  labs(title = "People's Budget Final Allocations",
+       subtitle = "Bus Tour Capture",
+       caption = "People's Budget Chicago | peoplesbudgetchicago.com",
+       x = "Community") +
+  theme(axis.text.x = element_text(face = "bold", 
+                           size = 10, angle = 45, hjust = 1))
+
+
+
+```
+=======
+---
+title: "bustour allocations"
+author: "Yi Ning"
+date: "10/27/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(kableExtra)
+library(RColorBrewer)
+library(tidyverse)
+library(reshape)
+
+bustour = read.csv('bustour_allocations.csv')
+```
+
+Make summary table
+```{r pressure, echo=FALSE}
+kbl(bustour) %>%
+  kable_styling(bootstrap_options = c("striped", "hover"))
+
+
+```
+Plot by theme and neighborhood
+```{r}
+##pivot data for bar graph
+melt_bustour <- melt(bustour, id=c("Location", "Notes"))
+colnames(melt_bustour) = c("Location", "Notes", "Theme", "Dollars")
+
+
+
+ggplot(melt_bustour, aes(fill=Theme, y=Dollars, x=Location)) + 
+    geom_bar(position="stack", stat="identity") + 
+  theme_minimal() + scale_fill_brewer(palette= 4) +
+  labs(title = "People's Budget Final Allocations",
+       subtitle = "Bus Tour Capture",
+       caption = "People's Budget Chicago | peoplesbudgetchicago.com",
+       x = "Community") +
+  theme(axis.text.x = element_text(face = "bold", 
+                           size = 10, angle = 45, hjust = 1))
+
+
+
+```
+>>>>>>> b18d100d7c1d2136235e6ac82bc7749c5704390f
+  

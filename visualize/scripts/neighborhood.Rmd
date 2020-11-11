@@ -1,0 +1,68 @@
+---
+title: "comm map"
+author: "Yi Ning"
+date: "10/24/2020"
+output: html_document
+---
+```{r}
+library(ggplot2)
+library(tidyverse)
+library(ggmap)
+library(data.table)
+#library(sf)
+library(viridis)
+library(rgdal)
+rm(list=ls())
+```
+
+```{r}
+summary_comm = read.csv("~/GitHub/Peoples Budget Viz/peoples-budget-viz/visualize/csvs/Peoples_Budget_user_summary_COMMUNITY_AREA.csv")
+shape <- readOGR(dsn=path.expand("~/GitHub/Peoples Budget Viz/peoples-budget-viz/visualize/csvs"), layer="commarea")
+
+#zip_shape <- st_read("zipcodes.shp")
+```
+
+```{r cars}
+shape = fortify(shape, region = "community")
+names(shape)[names(shape) == "id"] <- "commarea_name"
+
+shape$commarea_name = tolower(shape$commarea_name)
+summary_comm$CHI_COMM_AREA_NAME = tolower(summary_comm$CHI_COMM_AREA_NAME)
+names(summary_comm)[names(summary_comm) == "CHI_COMM_AREA_NAME"] <- "commarea_name"
+neighborhoods = unique(shape$commarea_name)
+
+
+##see what variables are missing from shape file
+shape %>%group_by(commarea_name) %>% count()%>%
+left_join(summary_comm %>%group_by(commarea_name) %>% count(), by = "commarea_name") %>% arrange(-desc(n.y))
+
+##add missing neighborhoods to data
+summary_comm = as.data.table(summary_comm)
+setkey(summary_comm, commarea_name)
+summary_comm = summary_comm[CJ(neighborhoods)] 
+summary_comm[is.na(summary_comm)] = 0
+
+
+#merge map info with peoples budget info
+merged = summary_comm  %>% left_join(shape, by = "commarea_name")
+
+  ggplot() +
+  geom_polygon(data = merged, aes(x=long, y = lat, group = commarea_name, fill = count), color="black") +
+  scale_fill_viridis(option="viridis") +
+  coord_fixed() + theme_minimal() + theme_void() + 
+  labs(
+    title = "Who filled out the People's Budget?",
+    subtitle = "Web Responses By Community Area",
+    caption = "People's Budget Chicago | peoplesbudgetchicago.com") +
+  theme(text = element_text(color = "#22211d"))
+  
+ggsave("~/GitHub/Peoples Budget Viz/peoples-budget-viz/visualize/output/commmap.png")
+
+#    plot.background = element_rect(fill = "#f5f5f2", color = NA),
+#    panel.background = element_rect(fill = "#f5f5f2", color = NA),
+  #  legend.background = element_rect(fill = "#f5f5f2", color = NA))
+```
+
+
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
