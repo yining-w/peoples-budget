@@ -10,8 +10,10 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tm)
 library(wordcloud2)
 library(wordcloud)
+library(ggplot2)
 library(RColorBrewer)
 library(webshot)
+remove(list=ls())
 ```
 **Word cloud with raw csv**
 ```{r}
@@ -80,6 +82,13 @@ wordcloud(words = wordcloud$word, freq = wordcloud$freq, min.freq = 1, max.words
           colors=brewer.pal(7, "Set1"))
 
 ##most frequent words 
+wordcloud = as.data.frame(wordcloud)
+wordcloud_filter = wordcloud %>% 
+  filter(freq >= 7) 
+
+  ggplot() %>%
+  geom_bar(aes(x=word, y = freq))
+
 barplot(wordcloud[1:10,]$freq, las = 2, names.arg = wordcloud[1:10,]$word,
         col = "maroon4", main ="Most frequent words",
         ylab = "Word frequencies")

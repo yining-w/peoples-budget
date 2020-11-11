@@ -40,11 +40,13 @@ Make summary tables for the ideas
 ```{r pressure, echo=FALSE}
 colnames(pairwise_eng) = c("Theme", "Idea", "Rank", "Group_Rank", "Score", "Total Matches")
 kbl(pairwise_eng) %>%
-  kable_styling(bootstrap_options = c("striped", "hover"))
+  kable_styling(bootstrap_options = c("striped", "hover")) %>%
+    save_kable("pairwise_eng.pdf")
 
-colnames(pairwise_eng) = c("Theme", "Idea", "Rank", "Group_Rank", "Score", "Total Matches")
+colnames(pairwise_spanish) = c("Theme", "Idea", "Rank", "Group_Rank", "Score", "Total Matches")
 kbl(pairwise_spanish) %>%
-  kable_styling(bootstrap_options = c("striped", "hover"))
+  kable_styling(bootstrap_options = c("striped", "hover")) %>%
+    save_kable("pairwise_spanish.pdf")
 
 
 ```
@@ -62,6 +64,7 @@ The further right the dot the higher its rank. The horizontal line indicates the
        caption = "The People's Budget Chicago",
        x = "Rank", y = "Score")
 
+ggsave("pairwise.png")
 ?geom_hline
   
 ```
