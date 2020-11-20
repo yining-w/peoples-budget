@@ -1,0 +1,180 @@
+---
+title: "ward map"
+author: "Yi Ning"
+date: "10/24/2020"
+output: html_document
+---
+```{r}
+list.of.packages <- c("tidyverse", 
+                      "readr",
+                      "usethis",
+                      "sf",
+                      "viridis",
+                      "rmapzen"
+                      )
+
+new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
+
+library()
+if(length(new.packages)) install.packages(new.packages)
+
+#load all required packages
+lapply(list.of.packages, require, character.only = TRUE)
+```
+
+```{r}
+
+summary_commarea = read.csv("~/GitHub/Peoples Budget Viz/peoples-budget-viz/visualize/csvs/Peoples_Budget_user_summary_COMMUNITY_AREA.csv")
+summary_geoarea = read.csv("~/GitHub/Peoples Budget Viz/peoples-budget-viz/visualize/csvs/Peoples_Budget_Index_community_area_groups.csv")
+
+chi_commarea_geometries <- st_read("~/GitHub/Peoples Budget Viz/peoples-budget-viz/visualize/csvs", "commarea")
+
+```
+
+
+```{r cars}
+
+
+#Get Centroids
+chi_commarea_geometries <- chi_commarea_geometries %>%
+      mutate(
+            CENTROID = map(geometry, st_centroid),
+            COORDS = map(CENTROID, st_coordinates),
+            longitude = map_dbl(COORDS, 1),
+            latitude = map_dbl(COORDS, 2)
+      ) %>%
+      select(-CENTROID, -COORDS) %>%
+      select(community, shape_area:geometry)
+
+
+chi_commarea_geometries$community = tolower(chi_commarea_geometries$community)
+summary_commarea$CHI_COMM_AREA_NAME = tolower(summary_commarea$CHI_COMM_AREA_NAME)
+names(summary_commarea)[names(summary_commarea) == "CHI_COMM_AREA_NAME"] <- "community"
+
+
+summary_geoarea$COMMAREA_NAME = tolower(summary_geoarea$COMMAREA_NAME)
+names(summary_geoarea)[names(summary_geoarea) == "COMMAREA_NAME"] <- "community"
+
+summary_area = summary_geoarea %>% left_join(summary_commarea
+                                       , by = "community")
+
+merged = chi_commarea_geometries %>% left_join(summary_area, by = "community")
+merged[is.na(merged)] = 0
+summary_area[is.na(summary_area)] = 0
+
+#figure out how to summarize 
+
+geo = 
+  merged %>%
+  left_join(summary_area %>% group_by(CHICAGO_ATLAS_SIDE) %>% summarise(sum=sum(count)), by="CHICAGO_ATLAS_SIDE")
+
+```
+
+```{r}
+##Vector Tiles
+options(nextzen_API_key = "xSaj7h_dTAOvPb4PMBUn_Q")
+mz_set_tile_host_nextzen(key = getOption("nextzen_API_key"))
+
+
+get_vector_tiles <- function(bbox){
+  mz_box=mz_rect(bbox$xmin,bbox$ymin,bbox$xmax,bbox$ymax)
+  mz_vector_tiles(mz_box)
+  }
+
+bbox <- st_bbox(chi_commarea_geometries)
+
+vector_tiles <- get_vector_tiles(bbox)
+
+roads <- as_sf(vector_tiles$roads)
+
+```
+
+```{r}
+#map
+geo_map = ggplot(geo) + 
+  geom_sf(aes(fill=factor(sum))) +  
+  geom_sf(data = roads %>% filter(kind == "highway"), color="white", size = 0.4, alpha = 0.7) +
+  scale_fill_viridis(direction = 1,
+                     name = "People Responded", 
+                     discrete = TRUE,
+                     breaks=c(4,30,39, 48),
+                     guide = guide_legend(keyheight = unit(3, units = "mm"), keywidth=unit(12, units = "mm"), 
+                                          label.position = "bottom", title.position = 'top', nrow=1,
+                                          breaks = 5)) +
+  coord_sf(datum = NA， xlim = c(-87.86011, -87.54414),ylim = c(41.65455, 42.01303)) +
+  theme_void() +
+  theme(axis.text.x=element_blank(), #remove axis data labels
+        axis.text.y=element_blank(),
+        axis.ticks=element_blank(),
+        panel.grid.major=element_line(colour="transparent"),
+        legend.position = c(.07,.07),
+        legend.text = element_text(
+          margin = margin(l = 5, unit = "pt")))
+
+##continuous
+geo_map = ggplot(geo) + 
+  geom_sf(aes(fill=sum)) +  
+  geom_sf(data = roads %>% filter(kind == "highway"), color="white", size = 0.4, alpha = 0.7) +
+  scale_fill_viridis(direction = 1,
+                     name = "People Responded", 
+                     guide = guide_legend(keyheight = unit(3, units = "mm"), keywidth=unit(12, units = "mm"), 
+                                          label.position = "bottom", title.position = 'top', nrow=1,
+                                          breaks = 5)) +
+  coord_sf(datum = NA， xlim = c(-87.86011, -87.54414),ylim = c(41.65455, 42.01303)) +
+  theme_void() +
+  theme(axis.text.x=element_blank(), #remove axis data labels
+        axis.text.y=element_blank(),
+        axis.ticks=element_blank(),
+        panel.grid.major=element_line(colour="transparent"),
+        legend.position = c(.07,.07),
+        legend.text = element_text(
+          margin = margin(l = 5, unit = "pt"))) 
+geo_map
+
+##With label
+labels = geo[c(7,15,20,28,38,45, 49,60, 71),]
+geo_label = 
+  ggplot(geo) + 
+  geom_sf(aes(fill=factor(sum))) +  
+  geom_sf(data = roads %>% filter(kind == "highway"), color="white", size = 0.4, alpha = 0.7) +
+  scale_fill_viridis(direction = 1,
+                     name = "People Responded", 
+                     discrete = TRUE,
+                     breaks=c(4,30,39, 48),
+                     guide = guide_legend(keyheight = unit(3, units = "mm"), keywidth=unit(12, units = "mm"), 
+                                          label.position = "bottom", title.position = 'top', nrow=1)) +
+  coord_sf(datum = NA， xlim = c(-87.86011, -87.54414),ylim = c(41.65455, 42.01303)) +
+  theme_void() +
+  theme(axis.text.x=element_blank(), #remove axis data labels
+        axis.text.y=element_blank(),
+        axis.ticks=element_blank(),
+        panel.grid.major=element_line(colour="transparent"),
+        legend.position = c(.07,.07),
+        legend.text = element_text(
+          margin = margin(l = 5, unit = "pt"))) + 
+  ggrepel::geom_label_repel(data = labels,
+                            aes(label = CHICAGO_ATLAS_SIDE, 
+                                x = longitude, 
+                                y = latitude),
+                             min.segment.length = 0,
+                            size = 3)
+
+
+?geom_label_repel
+
+
+```
+
+
+
+```{r}
+
+
+###Save as Image
+ggsave(plot = geo_label, 
+       width = 8, 
+       height = 8 / 0.8125,
+      "~/GitHub/Peoples Budget Viz/peoples-budget-viz/visualize/output/geo_label.png",
+       dpi=300)
+
+```

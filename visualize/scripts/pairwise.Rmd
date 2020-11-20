@@ -13,7 +13,8 @@ library(RColorBrewer)
 library(tidyverse)
 library(viridis)
 rm(list=ls())
-pairwise = read.csv("~/GitHub/Peoples Budget Viz/peoples-budget-viz/visualize/csvs/Peoples_Budget_wikisurvey_results.csv")
+pairwise = read.csv("~/GitHub/Peoples Budget Viz/peoples-budget-viz/visualize/csvs/Peoples_Budget_wikisurvey_results_share.csv")
+summary = read.csv("~/GitHub/Peoples Budget Viz/peoples-budget-viz/visualize/csvs/Peoples_Budget_wikisurvey_summary_by_category.csv")
 ```
 
 Set up
@@ -31,46 +32,78 @@ pairwise = pairwise[
 ]
 
 ##create a table for english
-pairwise_eng = subset(pairwise, select = c(Idea_Category,Idea_Text, Ranking, group_rank, AOI_web_score, total_matches))
+#pairwise_eng = subset(pairwise, select = c(Idea_Category,Idea_Text, Ranking, group_rank, AOI_web_score, total_matches))
 
 ##create a table for spanish
-pairwise_spanish = subset(pairwise, select = c(Idea_Category,Idea_ES, Ranking, group_rank, AOI_web_score, total_matches))
+#pairwise_spanish = subset(pairwise, select = c(Idea_Category,Idea_ES, Ranking, group_rank, AOI_web_score, total_matches))
 
 ```
 
 Make summary tables for the ideas
 ```{r pressure, echo=FALSE}
-colnames(pairwise_eng) = c("Theme", "Idea", "Rank", "Group_Rank", "Score", "Total Matches")
-kbl(pairwise_eng) %>%
+colnames(pairwise) = c("Idea", "Category", "Score", "Rank", "Total Matches", "Group_Rank")
+kbl(pairwise) %>%
   kable_styling(bootstrap_options = c("striped", "hover")) %>%
-    save_kable("pairwise_eng.pdf")
+    save_kable("~/GitHub/Peoples Budget Viz/peoples-budget-viz/visualize/output/pairwise_table.pdf")
 
 colnames(pairwise_spanish) = c("Theme", "Idea", "Rank", "Group_Rank", "Score", "Total Matches")
 kbl(pairwise_spanish) %>%
   kable_styling(bootstrap_options = c("striped", "hover")) %>%
-    save_kable("pairwise_spanish.pdf")
+    save_kable("~/GitHub/Peoples Budget Viz/peoples-budget-viz/visualize/output/pairwise_spanish.pdf")
 
 
 ```
 Plot by theme
 ```{r}
-pairwise_eng %>%
-  ggplot(aes(y = Score, x=Rank)) +
-  geom_hline(aes(yintercept=median(Score)), line = "dashed") +
+#pairwise_eng = pairwise_eng %>% mutate(median = (pairwise_eng %>% group_by(Theme) %>% summarise(median(Score))))
+
+pairwise_merge = 
+  pairwise %>%
+  left_join((pairwise %>% group_by(Category) %>% summarise(med_scr=median(Score))), by="Category")
+
+pairwise_graph =
+  ggplot(pairwise_merge, aes(Score,Rank)) +
+  geom_hline(aes(yintercept=med_scr, linetype = "dotted", col="")) +
   geom_point(aes(colour=factor(Rank))) +
-  scale_fill_viridis(discrete = TRUE, option="magma") +
-  facet_wrap(~Theme) + 
+  scale_color_viridis(discrete=TRUE) +
+  facet_wrap(~Category) + 
   theme_minimal() + 
   labs(title="All of the Ideas Visualized by Category",
-       subtitle = "Each dot represents an idea. The higher the dot, the higher its score/ 
+       subtitle = "Each dot represents an idea. The higher the dot, the higher its score. 
 The further right the dot the higher its rank. The horizontal line indicates the median score.",
        caption = "The People's Budget Chicago",
        x = "Rank", y = "Score") + 
   theme(legend.position = "none") 
 
-ggsave("~/GitHub/Peoples Budget Viz/peoples-budget-viz/visualize/output/pairwise.png")
-
-  
+pairwise_graph  
 ```
-  
+
+```{r}
+###Save as Image
+ggsave(plot = pairwise_graph, 
+       width = 8, 
+       height = 8 / 0.8125,
+      "~/GitHub/Peoples Budget Viz/peoples-budget-viz/visualize/output/pairwise.png",
+       dpi=300)
+
+```
+
+```{r}
+pairwise_penny_rank = ggplot(summary, aes(x = Idea_Category, y =penny_equivalent, fill = Idea_Category)) +
+  geom_bar(stat="identity") + 
+  geom_text(aes(label=best_rank), vjust=1.5, size=3.5, color = "white")+
+  theme_minimal() + 
+  labs(x = "Idea Category",
+       y = "Penny Equivalent",
+       caption = "People's Budget Chicago | pbchicago.com",
+       title = "Penny Equivalent of Pairwise Matching Results") + 
+  theme(legend.position="none",
+        axis.text.x = element_text(size = 7.5, vjust = 1))
+
+ggsave(plot = pairwise_penny_rank, 
+       width = 8, 
+       height = 8 / 0.8125,
+      "~/GitHub/Peoples Budget Viz/peoples-budget-viz/visualize/output/pairwise_penny_rank.png",
+       dpi=300)
+```
 =======

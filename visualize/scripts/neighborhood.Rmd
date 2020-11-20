@@ -1,68 +1,109 @@
 ---
-title: "comm map"
+title: "ward map"
 author: "Yi Ning"
 date: "10/24/2020"
 output: html_document
 ---
 ```{r}
-library(ggplot2)
-library(tidyverse)
-library(ggmap)
-library(data.table)
-#library(sf)
-library(viridis)
-library(rgdal)
-rm(list=ls())
+list.of.packages <- c("tidyverse", 
+                      "readr",
+                      "usethis",
+                      "sf",
+                      "viridis",
+                      "rmapzen"
+                      )
+
+new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
+
+library()
+if(length(new.packages)) install.packages(new.packages)
+
+#load all required packages
+lapply(list.of.packages, require, character.only = TRUE)
 ```
 
 ```{r}
-summary_comm = read.csv("~/GitHub/Peoples Budget Viz/peoples-budget-viz/visualize/csvs/Peoples_Budget_user_summary_COMMUNITY_AREA.csv")
-shape <- readOGR(dsn=path.expand("~/GitHub/Peoples Budget Viz/peoples-budget-viz/visualize/csvs"), layer="commarea")
 
-#zip_shape <- st_read("zipcodes.shp")
+summary_commarea = read.csv("~/GitHub/Peoples Budget Viz/peoples-budget-viz/visualize/csvs/Peoples_Budget_user_summary_COMMUNITY_AREA.csv")
+chi_commarea_geometries <- st_read("~/GitHub/Peoples Budget Viz/peoples-budget-viz/visualize/csvs", "commarea")
+
 ```
+
 
 ```{r cars}
-shape = fortify(shape, region = "community")
-names(shape)[names(shape) == "id"] <- "commarea_name"
-
-shape$commarea_name = tolower(shape$commarea_name)
-summary_comm$CHI_COMM_AREA_NAME = tolower(summary_comm$CHI_COMM_AREA_NAME)
-names(summary_comm)[names(summary_comm) == "CHI_COMM_AREA_NAME"] <- "commarea_name"
-neighborhoods = unique(shape$commarea_name)
 
 
-##see what variables are missing from shape file
-shape %>%group_by(commarea_name) %>% count()%>%
-left_join(summary_comm %>%group_by(commarea_name) %>% count(), by = "commarea_name") %>% arrange(-desc(n.y))
+#Get Centroids
+chi_commarea_geometries <- chi_commarea_geometries %>%
+      mutate(
+            CENTROID = map(geometry, st_centroid),
+            COORDS = map(CENTROID, st_coordinates),
+            longitude = map_dbl(COORDS, 1),
+            latitude = map_dbl(COORDS, 2)
+      ) %>%
+      select(-CENTROID, -COORDS) %>%
+      select(community, shape_area:geometry)
 
-##add missing neighborhoods to data
-summary_comm = as.data.table(summary_comm)
-setkey(summary_comm, commarea_name)
-summary_comm = summary_comm[CJ(neighborhoods)] 
-summary_comm[is.na(summary_comm)] = 0
 
 
-#merge map info with peoples budget info
-merged = summary_comm  %>% left_join(shape, by = "commarea_name")
+chi_commarea_geometries$community = tolower(chi_commarea_geometries$community)
+summary_commarea$CHI_COMM_AREA_NAME = tolower(summary_commarea$CHI_COMM_AREA_NAME)
+names(summary_commarea)[names(summary_commarea) == "CHI_COMM_AREA_NAME"] <- "community"
 
-  ggplot() +
-  geom_polygon(data = merged, aes(x=long, y = lat, group = commarea_name, fill = count), color="black") +
-  scale_fill_viridis(option="viridis") +
-  coord_fixed() + theme_minimal() + theme_void() + 
-  labs(
-    title = "Who filled out the People's Budget?",
-    subtitle = "Web Responses By Community Area",
-    caption = "People's Budget Chicago | peoplesbudgetchicago.com") +
-  theme(text = element_text(color = "#22211d"))
-  
-ggsave("~/GitHub/Peoples Budget Viz/peoples-budget-viz/visualize/output/commmap.png")
+merged = chi_commarea_geometries %>% left_join(summary_commarea, by = "community")
+```
 
-#    plot.background = element_rect(fill = "#f5f5f2", color = NA),
-#    panel.background = element_rect(fill = "#f5f5f2", color = NA),
-  #  legend.background = element_rect(fill = "#f5f5f2", color = NA))
+```{r}
+##Vector Tiles
+options(nextzen_API_key = "xSaj7h_dTAOvPb4PMBUn_Q")
+mz_set_tile_host_nextzen(key = getOption("nextzen_API_key"))
+
+
+get_vector_tiles <- function(bbox){
+  mz_box=mz_rect(bbox$xmin,bbox$ymin,bbox$xmax,bbox$ymax)
+  mz_vector_tiles(mz_box)
+  }
+
+bbox <- st_bbox(chi_commarea_geometries)
+
+vector_tiles <- get_vector_tiles(bbox)
+
+roads <- as_sf(vector_tiles$roads)
+
+```
+
+```{r}
+#map
+comm_map = ggplot(merged) + 
+  geom_sf(aes(fill=count)) +  
+  geom_sf(data = roads %>% filter(kind == "highway"), color="white", size = 0.4, alpha = 0.4) +
+  scale_fill_viridis(direction = 1,
+                     name = "People Responded", 
+                     guide = guide_legend(keyheight = unit(3, units = "mm"), keywidth=unit(12, units = "mm"), 
+                                          label.position = "bottom", title.position = 'top', nrow=1)) +
+  coord_sf(datum = NA， xlim = c(-87.86011, -87.54414),ylim = c(41.65455, 42.01303)) +
+  theme_void() +
+  theme(axis.text.x=element_blank(), #remove axis data labels
+        axis.text.y=element_blank(),
+        axis.ticks=element_blank(),
+        panel.grid.major=element_line(colour="transparent"),
+        legend.position = c(.07,.07),
+        legend.text = element_text(
+          margin = margin(l = 5, unit = "pt")))
+
+comm_map
 ```
 
 
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+```{r}
+
+
+###Save as Image
+ggsave(plot = comm_map, 
+       width = 8, 
+       height = 8 / 0.8125,
+      "~/GitHub/Peoples Budget Viz/peoples-budget-viz/visualize/output/commmap.png",
+       dpi=300)
+
+```

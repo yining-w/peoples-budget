@@ -5,64 +5,101 @@ date: "10/24/2020"
 output: html_document
 ---
 ```{r}
-library(ggplot2)
-library(tidyverse)
-library(ggmap)
-#library(sf)
-library(plotly)
-library(data.table)
-library(rgdal)
-library(viridis)
-rm(list=ls())
+list.of.packages <- c("tidyverse", 
+                      "readr",
+                      "usethis",
+                      "sf",
+                      "viridis",
+                      "rmapzen"
+                      )
+
+new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
+
+library()
+if(length(new.packages)) install.packages(new.packages)
+
+#load all required packages
+lapply(list.of.packages, require, character.only = TRUE)
 ```
 
 ```{r}
+
 summary_ward = read.csv("~/GitHub/Peoples Budget Viz/peoples-budget-viz/visualize/csvs/Peoples_Budget_user_summary_WARD.csv")
-shape <- readOGR(dsn=path.expand("~/GitHub/Peoples Budget Viz/peoples-budget-viz/visualize/csvs"), layer="wards")
+chi_ward_geometries <- st_read("~/GitHub/Peoples Budget Viz/peoples-budget-viz/visualize/csvs", "wards")
 
-
-#zip_shape <- st_read("zipcodes.shp")
 ```
 
+
+
 ```{r cars}
-shape = fortify(shape, region = "ward")
-names(shape)[names(shape) == "id"] <- "ward"
-
-summary_ward$ward = tolower(summary_ward$Ward)
-wards = unique(shape$ward)
 
 
-##see what variables are missing from shape file
-shape %>%group_by(ward) %>% count()%>%
-left_join(summary_ward %>%group_by(ward) %>% count(), by = "ward") %>% arrange(-desc(n.y))
+#Get Centroids
+chi_ward_geometries <- chi_ward_geometries %>%
+      mutate(
+            CENTROID = map(geometry, st_centroid),
+            COORDS = map(CENTROID, st_coordinates),
+            longitude = map_dbl(COORDS, 1),
+            latitude = map_dbl(COORDS, 2)
+      ) %>%
+      select(-CENTROID, -COORDS) %>%
+      select(ward, shape_area:geometry)
 
-##add missing wards to data
-summary_ward = as.data.table(summary_ward)
-setkey(summary_ward, ward)
-summary_ward = summary_ward[CJ(ward)] 
-summary_ward[is.na(summary_ward)] = 0
+##Merge Data
+merged = chi_ward_geometries %>% left_join(summary_ward, by = "ward")
+```
 
-##join
-merged = summary_ward  %>% left_join(shape, by = "ward")
+```{r}
+##Vector Tiles
+options(nextzen_API_key = "xSaj7h_dTAOvPb4PMBUn_Q")
+mz_set_tile_host_nextzen(key = getOption("nextzen_API_key"))
 
-###regular map
-wardmap = ggplot() +
-  geom_polygon(data = merged, aes(x=long, y = lat, group = ward, fill = count), color="black", alpha = .7) +
- # scale_fill_gradientn(name = "Number of respondents", colors = c("grey", "steelblue1", "steelblue", #"steelblue4")) +
-  scale_fill_viridis(option="viridis") + 
-  coord_fixed() + 
-  theme_void() + 
-  theme_minimal() + 
-    labs(title = "Survey Responses",
-      subtitle = "Share by Ward",
-    caption = "Data: People's Budget Chicago | peoplesbudgetchicago.com"
-  ) 
 
-wardmap
+get_vector_tiles <- function(bbox){
+  mz_box=mz_rect(bbox$xmin,bbox$ymin,bbox$xmax,bbox$ymax)
+  mz_vector_tiles(mz_box)
+  }
+
+bbox <- st_bbox(chi_ward_geometries)
+
+vector_tiles <- get_vector_tiles(bbox)
+
+roads <- as_sf(vector_tiles$roads)
+
+```
+
+```{r}
+#map
+ward_map = ggplot(merged) + 
+  geom_sf(aes(fill=count)) +  
+  geom_sf(data = roads %>% filter(kind == "highway"), color="white", size = 0.4, alpha = 0.4) +
+  scale_fill_viridis(direction = 1,
+                     name = "People Responded", 
+                     guide = guide_legend(keyheight = unit(3, units = "mm"), keywidth=unit(12, units = "mm"), 
+                                          label.position = "bottom", title.position = 'top', nrow=1)) +
+  coord_sf(datum = NA， xlim = c(-87.86011, -87.54414),ylim = c(41.65455, 42.01303)) +
+  theme_void() +
+  theme(axis.text.x=element_blank(), #remove axis data labels
+        axis.text.y=element_blank(),
+        axis.ticks=element_blank(),
+        panel.grid.major=element_line(colour="transparent"),
+        legend.position = c(.07,.07),
+        legend.text = element_text(
+          margin = margin(l = 5, unit = "pt")))
+
+```
+
+
+
+```{r}
+
 
 ###Save as Image
-ggsave("~/GitHub/Peoples Budget Viz/peoples-budget-viz/visualize/output/wardmap.png")
-
+ggsave(plot = ward_map, 
+       width = 8, 
+       height = 8 / 0.8125,
+      "~/GitHub/Peoples Budget Viz/peoples-budget-viz/visualize/output/wardmap.png",
+       dpi=300)
 
 ```
 
@@ -82,24 +119,3 @@ htmlwidgets::saveWidget(as_widget(interactive_ward), "wardplotly.html")
 
 ```
 
-
-**Outline Only**
-```{r}
-
-  ggplot() +
-  geom_polygon(data = merged, aes(x=long, y = lat, group = ward), color="black", fill = "white", size = 1) +
-  coord_fixed() + theme_void() + 
-  labs(
-    title = " ",
-    subtitle = " ",
-    caption = " "
-  ) +
-  theme(
-    text = element_text(color = "#22211d")) 
-
-ggsave("wardoutline.png")
-
-```
-
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
