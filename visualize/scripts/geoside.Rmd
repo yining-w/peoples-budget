@@ -97,20 +97,23 @@ geo_map = ggplot(geo) +
   scale_fill_viridis(direction = 1,
                      name = "People Responded", 
                      discrete = TRUE,
-                     breaks=c(4,30,39, 48),
+#                     breaks=c(4,10, 12, 30,32,39,48),
                      guide = guide_legend(keyheight = unit(3, units = "mm"), keywidth=unit(12, units = "mm"), 
-                                          label.position = "bottom", title.position = 'top', nrow=1,
-                                          breaks = 5)) +
+                                          label.position = "top", title.position = 'top', nrow=5,)) +
   coord_sf(datum = NA， xlim = c(-87.86011, -87.54414),ylim = c(41.65455, 42.01303)) +
   theme_void() +
   theme(axis.text.x=element_blank(), #remove axis data labels
         axis.text.y=element_blank(),
         axis.ticks=element_blank(),
         panel.grid.major=element_line(colour="transparent"),
-        legend.position = c(.07,.07),
+        legend.position = c(-.15,.72),
         legend.text = element_text(
           margin = margin(l = 5, unit = "pt")))
 
+geo_map
+```
+
+```{r}
 ##continuous
 geo_map = ggplot(geo) + 
   geom_sf(aes(fill=sum)) +  
@@ -118,8 +121,7 @@ geo_map = ggplot(geo) +
   scale_fill_viridis(direction = 1,
                      name = "People Responded", 
                      guide = guide_legend(keyheight = unit(3, units = "mm"), keywidth=unit(12, units = "mm"), 
-                                          label.position = "bottom", title.position = 'top', nrow=1,
-                                          breaks = 5)) +
+                                          label.position = "top", title.position = 'top', nrow=2)) +
   coord_sf(datum = NA， xlim = c(-87.86011, -87.54414),ylim = c(41.65455, 42.01303)) +
   theme_void() +
   theme(axis.text.x=element_blank(), #remove axis data labels
@@ -140,27 +142,27 @@ geo_label =
   scale_fill_viridis(direction = 1,
                      name = "People Responded", 
                      discrete = TRUE,
-                     breaks=c(4,30,39, 48),
+                     #breaks=c(4,30,39, 48),
                      guide = guide_legend(keyheight = unit(3, units = "mm"), keywidth=unit(12, units = "mm"), 
-                                          label.position = "bottom", title.position = 'top', nrow=1)) +
+                                          label.position = "bottom", title.position = 'top', nrow=5)) +
   coord_sf(datum = NA， xlim = c(-87.86011, -87.54414),ylim = c(41.65455, 42.01303)) +
   theme_void() +
   theme(axis.text.x=element_blank(), #remove axis data labels
         axis.text.y=element_blank(),
         axis.ticks=element_blank(),
         panel.grid.major=element_line(colour="transparent"),
-        legend.position = c(.07,.07),
+        legend.position = c(-.15, .75),
         legend.text = element_text(
           margin = margin(l = 5, unit = "pt"))) + 
   ggrepel::geom_label_repel(data = labels,
                             aes(label = CHICAGO_ATLAS_SIDE, 
                                 x = longitude, 
                                 y = latitude),
-                             min.segment.length = 0,
-                            size = 3)
+                             min.segment.length = 0)
 
 
-?geom_label_repel
+
+geo_label
 
 
 ```
@@ -171,8 +173,8 @@ geo_label =
 
 
 ###Save as Image
-ggsave(plot = geo_label, 
-       width = 8, 
+ggsave(plot = geo_map, 
+       width = 12, 
        height = 8 / 0.8125,
       "~/GitHub/Peoples Budget Viz/peoples-budget-viz/visualize/output/geo_label.png",
        dpi=300)

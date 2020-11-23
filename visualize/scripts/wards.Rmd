@@ -20,6 +20,7 @@ if(length(new.packages)) install.packages(new.packages)
 
 #load all required packages
 lapply(list.of.packages, require, character.only = TRUE)
+remove(list=ls())
 ```
 
 ```{r}
@@ -45,6 +46,8 @@ chi_ward_geometries <- chi_ward_geometries %>%
       select(-CENTROID, -COORDS) %>%
       select(ward, shape_area:geometry)
 
+colnames(summary_ward)[1] = "ward"
+chi_ward_geometries = transform(chi_ward_geometries, ward = as.numeric(ward))
 ##Merge Data
 merged = chi_ward_geometries %>% left_join(summary_ward, by = "ward")
 ```
@@ -62,6 +65,7 @@ get_vector_tiles <- function(bbox){
 
 bbox <- st_bbox(chi_ward_geometries)
 
+
 vector_tiles <- get_vector_tiles(bbox)
 
 roads <- as_sf(vector_tiles$roads)
@@ -70,23 +74,26 @@ roads <- as_sf(vector_tiles$roads)
 
 ```{r}
 #map
-ward_map = ggplot(merged) + 
-  geom_sf(aes(fill=count)) +  
+ward_map = 
+  ggplot(merged) + 
+  geom_sf(aes(fill=(count))) +  
   geom_sf(data = roads %>% filter(kind == "highway"), color="white", size = 0.4, alpha = 0.4) +
   scale_fill_viridis(direction = 1,
                      name = "People Responded", 
+                     breaks=c(0, 5, 10,15, 20, 23),
                      guide = guide_legend(keyheight = unit(3, units = "mm"), keywidth=unit(12, units = "mm"), 
-                                          label.position = "bottom", title.position = 'top', nrow=1)) +
+                                          label.position = "bottom", title.position = 'top', nrow=5)) +
   coord_sf(datum = NA， xlim = c(-87.86011, -87.54414),ylim = c(41.65455, 42.01303)) +
   theme_void() +
   theme(axis.text.x=element_blank(), #remove axis data labels
         axis.text.y=element_blank(),
         axis.ticks=element_blank(),
         panel.grid.major=element_line(colour="transparent"),
-        legend.position = c(.07,.07),
+        legend.position = c(-.12,.8),
         legend.text = element_text(
           margin = margin(l = 5, unit = "pt")))
 
+ward_map
 ```
 
 
@@ -96,9 +103,9 @@ ward_map = ggplot(merged) +
 
 ###Save as Image
 ggsave(plot = ward_map, 
-       width = 8, 
+       width = 12, 
        height = 8 / 0.8125,
-      "~/GitHub/Peoples Budget Viz/peoples-budget-viz/visualize/output/wardmap.png",
+      "~/GitHub/Peoples Budget Viz/peoples-budget-viz/visualize/output/wardmap_legend2.png",
        dpi=300)
 
 ```

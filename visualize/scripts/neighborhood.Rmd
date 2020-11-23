@@ -79,15 +79,16 @@ comm_map = ggplot(merged) +
   geom_sf(data = roads %>% filter(kind == "highway"), color="white", size = 0.4, alpha = 0.4) +
   scale_fill_viridis(direction = 1,
                      name = "People Responded", 
+                     breaks = c(5, 10, 15, 20, 25, 30),
                      guide = guide_legend(keyheight = unit(3, units = "mm"), keywidth=unit(12, units = "mm"), 
-                                          label.position = "bottom", title.position = 'top', nrow=1)) +
+                                          label.position = "bottom", title.position = 'top', nrow=6)) +
   coord_sf(datum = NA， xlim = c(-87.86011, -87.54414),ylim = c(41.65455, 42.01303)) +
   theme_void() +
   theme(axis.text.x=element_blank(), #remove axis data labels
         axis.text.y=element_blank(),
         axis.ticks=element_blank(),
         panel.grid.major=element_line(colour="transparent"),
-        legend.position = c(.07,.07),
+        legend.position = c(-.2,.8),
         legend.text = element_text(
           margin = margin(l = 5, unit = "pt")))
 
@@ -101,7 +102,7 @@ comm_map
 
 ###Save as Image
 ggsave(plot = comm_map, 
-       width = 8, 
+       width = 15, 
        height = 8 / 0.8125,
       "~/GitHub/Peoples Budget Viz/peoples-budget-viz/visualize/output/commmap.png",
        dpi=300)
